@@ -9,6 +9,7 @@ gem 'omniauth'
 
 gem 'omniauth-facebook'
 
+gem 'faker'
 
 gem 'figaro'
 
