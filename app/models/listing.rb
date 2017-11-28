@@ -1,4 +1,4 @@
 class Listing < ApplicationRecord
 	belongs_to :user
-	paginates_per 50
+	mount_uploader :photos, PhotoUploader
 end

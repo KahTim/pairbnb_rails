@@ -1,4 +1,10 @@
 <div class="text-field">
+  <%= form.label :avatar %>
+  <%= form.file_field :avatar, class: "form-control" %>
+</div>
+
+
+<div class="text-field">
   <%= form.label :name %>
   <%= form.text_field :name, type: 'name' %>
 </div>
@@ -9,6 +15,6 @@
 </div>
 
 <div class="password-field">
-  <%= form.label :password %>
-  <%= form.password_field :password %>
+  <%#= form.label :password %>
+  <%#= form.password_field :password %>
 </div>
