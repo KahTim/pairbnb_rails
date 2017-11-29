@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   get 'home/index'
 
+  resources :listings
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
 
-  resources :users, controller: "clearance/users", only: [:create, :edit, :update] do
+  resources :users, controller: "users", only: [:create, :edit, :update] do
     resource :password,
       controller: "clearance/passwords",
       only: [:create, :edit, :update]

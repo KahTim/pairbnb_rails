@@ -1,1 +1,12 @@
-<h1>Test</h1>
+<h1>Edit Your Profile</h1>
+<p><%= image_tag current_user.avatar.thumb.to_s %></p>
+<%= form_for @user do |form| %>
+<%= render partial: '/users/form', object: form %> 
+
+<div class="submit-field">
+  <%= form.submit %>
+</div>
+
+<% end %>
+
+<%= link_to "Home", home_index_path%>
