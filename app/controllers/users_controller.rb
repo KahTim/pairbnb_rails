@@ -1,5 +1,5 @@
 class UsersController < Clearance::UsersController
-
+	
 	def edit
 		@user = User.find(current_user.id)
 	end
