@@ -1,0 +1,15 @@
+<h1>Listing: <%= @listing.name %></h1>
+
+
+<% @listing.photos.each do |photo| %>
+	<span><%= image_tag photo.thumb.to_s %></span>
+<%end%>
+<%#byebug%>
+<div>Place type: <%= @listing.place_type %></div>
+
+<%if @listing.user_id == current_user.id %>
+<p><%= link_to "Edit Listing", edit_user_listing_path(@listing.id) %></p>	
+<%end%>
+<div><%= link_to "My Listings", user_listings_path(current_user.id)%></div>
+<div> <%= link_to "All Listings", listings_path%></div>
+<p><%= link_to "Home", home_index_path%></p>
