@@ -1,0 +1,7 @@
+<h1>Edit listing for <%= @listing.name%></h1>
+
+<%= render partial: '/listings/form'%>
+
+<div><%= link_to "My Listing", user_listings_path(current_user.id)%></div>
+<div> <%= link_to "All Listings", listings_path%></div>
+<div><%= link_to "Home", home_index_path%></div>

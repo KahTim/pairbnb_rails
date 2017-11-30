@@ -1,5 +1,4 @@
 class UsersController < Clearance::UsersController
-	
 
 	def edit
 		@user = User.find(current_user.id)
@@ -29,6 +28,5 @@ class UsersController < Clearance::UsersController
 	def user_params
 		params.require(:user).permit(:name, :email, :password, :avatar)
 	end
-
 
 end

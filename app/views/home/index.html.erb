@@ -6,14 +6,19 @@
 <% end %>
 
 <div><%= link_to "Create new listing", new_user_listing_path(current_user.id)%></div>
+<div><%= link_to "My Listings", user_listings_path(current_user.id)%></div>
 <div> <%= link_to "All Listings", listings_path%></div>
 <% if current_user %>
 <div> <%= link_to "Edit Profile", edit_user_path(current_user.id) %> </div>
 <% end %>
 
 <% @user.listings.each do |listing| %>
+
+	<div>
+	<span><%= listing.name%> </span>
 	<% listing.photos.each do |photo| %>
-	<p><%= image_tag photo.thumb.to_s %></p>
+		<span><%= link_to (image_tag photo.thumb.to_s), listing_path(listing.id.to_i) %></span>
 	<%end%>
+	</div>
 <%end%>
 

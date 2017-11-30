@@ -1,6 +1,12 @@
 class ListingsController < ApplicationController
+	
 	def index
-		@listings = Listing.order(:name).page(params[:page]).per(10)
+		id = params[:user_id]
+		if id
+			@listings = current_user.listings.order(:name).page(params[:page]).per(10)
+		else
+			@listings = Listing.order(:name).page(params[:page]).per(10)
+		end
 	end
 
 	def new
@@ -15,6 +21,26 @@ class ListingsController < ApplicationController
 		else
 			redirect_to new_user_listing_path(current_user.id)
 		end
+	end
+
+	def show
+		id = params[:id]
+		@listing = Listing.find(id)
+	end
+
+	def edit
+		id = params[:id]
+		@listing = Listing.find(id)
+	end
+
+	def update
+		id = params[:id]
+		@listing = Listing.find(id)
+			if @listing.update_attributes(listing_params)
+				redirect_to listing_path(@listing.id)
+			else
+				redirect_to edit_user_listing_path(@listing.id)
+			end
 	end
 
 	private 
