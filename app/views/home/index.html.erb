@@ -21,4 +21,44 @@
 	<%end%>
 	</div>
 <%end%>
+<h3>My Reservations</h3>
+<% r = Reservation.where(user_id: current_user.id) %>
+<% r.each do |x| %>
 
+    <div>
+    <% l = Listing.find(x.listing_id) %>    
+    <span><%= l.name%> </span>
+    <% l.photos.each do |photo| %>
+        <span><%= link_to (image_tag photo.thumb.to_s), listing_path(l.id.to_i) %></span>
+    <%end%>
+    <span><%= x.start_date %></span>
+    <span> __ </span>
+    <span><%= x.end_date %></span>
+    <span> __ </span>
+    <span><%= x.duration %> days</span>
+    <span> __ </span>
+    <span><%= link_to "Delete", user_listing_reservation_path(current_user,l,x), method: :delete %></span>
+    </div>
+<%end%>
+
+<!-- <div class="container">
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+    </div>
+</div>
+
+ -->
