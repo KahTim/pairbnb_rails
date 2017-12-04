@@ -17,7 +17,11 @@
 
   <div id="flash">
     <% flash.each do |key, value| -%>
-      <div id="flash_<%= key %>"><%=h value %></div>
+      <div class="alert alert-<%= key %>">
+        <% value.each do |x,y| %>
+          <p><%= x.to_s + "  =>  " + y.first if y.first != nil %></p>
+        <% end %>
+      </div>
     <% end %>
   </div>
 

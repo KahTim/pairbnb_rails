@@ -6,8 +6,7 @@ class User < ApplicationRecord
   has_many :authentications, dependent: :destroy
   mount_uploader :avatar, AvatarUploader
   has_many :listings, dependent: :destroy
-  has_many :reservation_relationships, class_name:"Reservation", foreign_key:"listing_id"
-  has_many :reservations, through: :reservation_relationships, source: :listing
+  has_many :reservations
    
 
   def self.create_with_auth_and_hash(authentication, auth_hash)

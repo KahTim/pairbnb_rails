@@ -10,7 +10,7 @@
 <%if @listing.user_id == current_user.id %>
 	<p><%= link_to "Edit Listing", edit_user_listing_path(@listing.id) %></p>	
 <% else %>
-	<p><%= link_to "BOOK THIS PROPERTY", %></p>
+	<p><%= link_to "BOOK THIS PROPERTY", new_user_listing_reservation_path(user_id: current_user.id, listing_id: @listing.id) %></p>
 <%end%>
 <div><%= link_to "My Listings", user_listings_path(current_user.id)%></div>
 <div> <%= link_to "All Listings", listings_path%></div>
