@@ -1,0 +1,31 @@
+<%= form_for @reservation do |form| %>
+
+	<div>
+	  <%= form.label :photos %>
+	  <%= form.file_field :photos, multiple: true %>
+	</div>
+	
+	<div>
+		<%= form.label :name %>
+		<%= form.text_field :name %> 
+	</div>
+
+	<div>
+	  <%= form.label :place_type %>
+	  <%= form.select :place_type, options_for_select(Listing::PLACE_TYPE_OPTIONS) %>
+	</div>
+
+	<div>
+	  <%= form.label :property_type %>
+	  <%= form.text_field :property_type %> 
+	</div>
+
+	<div>
+	  <%= form.label :price %>
+	  <%= form.text_field :price %> 
+	</div>
+
+	<div class="submit-field">
+	  <%= form.submit %>
+	</div>
+<% end %>
