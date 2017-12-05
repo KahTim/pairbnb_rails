@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'braintree/new'
+
   get 'home/index'
 
   resources :listings, only: [:index, :show]
@@ -23,5 +25,5 @@ Rails.application.routes.draw do
   root 'home#index'
 
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
-
+  post 'braintree/checkout'
 end
