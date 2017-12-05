@@ -4,6 +4,11 @@
   <%= stylesheet_link_tag 'application' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tag %>
+  <!-- Load the Client component. -->
+  <script src="https://js.braintreegateway.com/web/3.6.3/js/client.min.js"></script>
+
+  <!-- Load the Hosted Fields component. -->
+  <script src="https://js.braintreegateway.com/web/3.6.3/js/hosted-fields.min.js"></script>
 </head>
 <body>
   <div id="header">
@@ -17,11 +22,15 @@
 
   <div id="flash">
     <% flash.each do |key, value| -%>
-      <div class="alert alert-<%= key %>">
-        <% value.each do |x,y| %>
-          <p><%= x.to_s + "  =>  " + y.first if y.first != nil %></p>
-        <% end %>
-      </div>
+      <% if value.class != String %>
+        <div class="alert alert-<%= key %>">
+          <% value.each do |x,y| %>
+            <p><%= x.to_s + "  =>  " + y.first if y.first != nil %></p>
+          <% end %>
+        </div>
+      <% else %>
+        <%= value %>
+      <% end %>
     <% end %>
   </div>
 
