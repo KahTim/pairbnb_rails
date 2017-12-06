@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'braintree/new'
+  get 'reservations/:id/braintree/new' => 'braintree#new', as: :braintree_new
+  post 'reservations/:id/braintree/checkout' => 'braintree#checkout', as: :braintree_checkout
 
   get 'home/index'
 
@@ -25,5 +26,4 @@ Rails.application.routes.draw do
   root 'home#index'
 
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
-  post 'braintree/checkout'
 end
