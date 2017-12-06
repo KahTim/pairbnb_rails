@@ -14,7 +14,10 @@ class BraintreeController < ApplicationController
       }
      )
 
-    if result.success?
+    if result.success? 
+      x = Reservation.last
+      y = Listing.find(x.listing_id)
+      ReservationMailer.booking_email(User.find(x.user_id), User.find(y.user_id), x.id).deliver_now
       redirect_to :root, :flash => { :success => "Transaction successful!" }
     else
       redirect_to :root, :flash => { :error => "Transaction failed. Please try again." }
