@@ -5,6 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'sidekiq'
 gem "letter_opener", :group => :development
 gem 'braintree'
 gem 'momentjs-rails', '>= 2.9.0'

@@ -12,8 +12,9 @@ class ReservationsController < ApplicationController
 		@reservation.user_id = current_user.id
 		@listing = Listing.find(params[:listing_id])
 		@reservation.listing_id = @listing.id
+
 		if @reservation.save
-			redirect_to braintree_new_path
+			redirect_to braintree_new_path(@reservation.id)
 		else
 			# @errors = @reservation.errors.messages
 			# byebug

@@ -1,9 +1,11 @@
 class BraintreeController < ApplicationController
   def new
+    @reservation = Reservation.find(params[:id])
   	@client_token = Braintree::ClientToken.generate
   end
 
   def checkout
+    @reservation = Reservation.find(params[:id])
     nonce_from_the_client = params[:checkout_form][:payment_method_nonce]
 
     result = Braintree::Transaction.sale(
@@ -15,9 +17,7 @@ class BraintreeController < ApplicationController
      )
 
     if result.success? 
-      x = Reservation.last
-      y = Listing.find(x.listing_id)
-      ReservationMailer.booking_email(User.find(x.user_id), User.find(y.user_id), x.id).deliver_now
+      ReservationJob.perform_later(@reservation)
       redirect_to :root, :flash => { :success => "Transaction successful!" }
     else
       redirect_to :root, :flash => { :error => "Transaction failed. Please try again." }
