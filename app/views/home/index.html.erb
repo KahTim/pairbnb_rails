@@ -3,44 +3,44 @@
 <% if current_user %>
 <h2> Welcome <%= link_to User.find(current_user.id).name, root_path %> </h2>
 <p><%= image_tag current_user.avatar.thumb.to_s %></p>
-<% end %>
-
 <div><%= link_to "Create new listing", new_user_listing_path(current_user.id)%></div>
 <div><%= link_to "My Listings", user_listings_path(current_user.id)%></div>
-<div> <%= link_to "All Listings", listings_path%></div>
-<% if current_user %>
 <div> <%= link_to "Edit Profile", edit_user_path(current_user.id) %> </div>
 <% end %>
 
-<% @user.listings.each do |listing| %>
 
-	<div>
-	<span><%= listing.name%> </span>
-	<% listing.photos.each do |photo| %>
-		<span><%= link_to (image_tag photo.thumb.to_s), listing_path(listing.id.to_i) %></span>
-	<%end%>
-	</div>
-<%end%>
-<h3>My Reservations</h3>
-<% r = Reservation.where(user_id: current_user.id) %>
-<% r.each do |x| %>
+<div> <%= link_to "All Listings", listings_path%></div>
 
-    <div>
-    <% l = Listing.find(x.listing_id) %>    
-    <span><%= l.name%> </span>
-    <% l.photos.each do |photo| %>
-        <span><%= link_to (image_tag photo.thumb.to_s), listing_path(l.id.to_i) %></span>
+<% if current_user %>
+    <% @user.listings.each do |listing| %>
+
+    	<div>
+    	<span><%= listing.name%> </span>
+    	<% listing.photos.each do |photo| %>
+    		<span><%= link_to (image_tag photo.thumb.to_s), listing_path(listing.id.to_i) %></span>
+    	<%end%>
+    	</div>
     <%end%>
-    <span><%= x.start_date %></span>
-    <span> __ </span>
-    <span><%= x.end_date %></span>
-    <span> __ </span>
-    <span><%= x.duration %> days</span>
-    <span> __ </span>
-    <span><%= link_to "Delete", user_listing_reservation_path(current_user,l,x), method: :delete %></span>
-    </div>
-<%end%>
+    <h3>My Reservations</h3>
+    <% r = Reservation.where(user_id: current_user.id) %>
+    <% r.each do |x| %>
 
+        <div>
+        <% l = Listing.find(x.listing_id) %>    
+        <span><%= l.name%> </span>
+        <% l.photos.each do |photo| %>
+            <span><%= link_to (image_tag photo.thumb.to_s), listing_path(l.id.to_i) %></span>
+        <%end%>
+        <span><%= x.start_date %></span>
+        <span> __ </span>
+        <span><%= x.end_date %></span>
+        <span> __ </span>
+        <span><%= x.duration %> days</span>
+        <span> __ </span>
+        <span><%= link_to "Delete", user_listing_reservation_path(current_user,l,x), method: :delete %></span>
+        </div>
+    <%end%>
+<% end %>
 <!-- <div class="container">
     <div class="row">
         <div class='col-sm-6'>
