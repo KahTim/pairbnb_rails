@@ -1,11 +1,16 @@
 class ListingsController < ApplicationController
 	
 	def index
+		x = params[:search]
 		id = params[:user_id]
-		if id
-			@listings = current_user.listings.order(:name).page(params[:page]).per(10)
+		if x
+			@listings = Listing.where(["name LIKE ?", "%#{params[:search]}%"]).order(:name).page(params[:page]).per(10)
 		else
-			@listings = Listing.order(:name).page(params[:page]).per(10)
+			if id
+				@listings = current_user.listings.order(:name).page(params[:page]).per(10)
+			else
+				@listings = Listing.order(:name).page(params[:page]).per(10)
+			end
 		end
 	end
 

@@ -11,6 +11,14 @@
 
 <div> <%= link_to "All Listings", listings_path%></div>
 
+<div>
+   <%= form_tag listings_path, :method => 'get' do %>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search" %>
+   <% end %>
+
+</div>
+
 <% if current_user %>
     <% @user.listings.each do |listing| %>
 
