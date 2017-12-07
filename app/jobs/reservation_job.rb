@@ -5,7 +5,7 @@ class ReservationJob < ApplicationJob
   	@reservation = reservation
   	# x = Reservation.last
   	y = Listing.find(@reservation.listing_id)
-  	ReservationMailer.booking_email(User.find(@reservation.user_id), User.find(y.user_id), @reservation.id).deliver_now
+  	ReservationMailer.booking_email(User.find(@reservation.user_id), User.find(y.user_id), @reservation.id).deliver_later
     # Do something later
   end
 end
